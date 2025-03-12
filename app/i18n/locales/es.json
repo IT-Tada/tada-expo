@@ -1,0 +1,41 @@
+{
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "error": "Error",
+    "success": "Éxito",
+    "loading": "Cargando..."
+  },
+  "preferences": {
+    "title": "Preferencias",
+    "language": {
+      "title": "Idioma",
+      "select": "Seleccionar idioma"
+    },
+    "age": {
+      "title": "Rango de edad",
+      "ranges": {
+        "under-3": "Menos de 3 años",
+        "3-5": "3-5 años",
+        "6-9": "6-9 años",
+        "10-15": "10-15 años",
+        "16-plus": "16+ años"
+      }
+    },
+    "errors": {
+      "selectAge": "Por favor selecciona un rango de edad",
+      "saveFailed": "Error al guardar las preferencias"
+    }
+  },
+  "home": {
+    "title": "Generador de Historias Mágicas",
+    "pressToSpeak": "Presiona para hablar",
+    "listening": "Escuchando...",
+    "remainingStories": "Historias restantes",
+    "magicUniverses": "Universos Mágicos",
+    "speechUnavailable": "La síntesis de voz no está disponible en tu dispositivo",
+    "selectUniverse": "¡Primero selecciona un universo mágico para tu historia!",
+    "listeningPrompt": "¡Te escucho! Cuéntame tu historia...",
+    "storyReceived": "¡He entendido tu historia! ¡La transformaré en algo mágico!"
+  }
+}

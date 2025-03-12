@@ -1,0 +1,41 @@
+{
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "loading": "Laden..."
+  },
+  "preferences": {
+    "title": "Einstellungen",
+    "language": {
+      "title": "Sprache",
+      "select": "Sprache auswählen"
+    },
+    "age": {
+      "title": "Altersgruppe",
+      "ranges": {
+        "under-3": "Unter 3 Jahre",
+        "3-5": "3-5 Jahre",
+        "6-9": "6-9 Jahre",
+        "10-15": "10-15 Jahre",
+        "16-plus": "16+ Jahre"
+      }
+    },
+    "errors": {
+      "selectAge": "Bitte wähle eine Altersgruppe aus",
+      "saveFailed": "Fehler beim Speichern der Einstellungen"
+    }
+  },
+  "home": {
+    "title": "Magischer Geschichtengenerator",
+    "pressToSpeak": "Zum Sprechen drücken",
+    "listening": "Ich höre zu...",
+    "remainingStories": "Verbleibende Geschichten",
+    "magicUniverses": "Magische Universen",
+    "speechUnavailable": "Sprachsynthese ist auf deinem Gerät nicht verfügbar",
+    "selectUniverse": "Wähle zuerst ein magisches Universum für deine Geschichte!",
+    "listeningPrompt": "Ich höre zu! Erzähl mir deine Geschichte...",
+    "storyReceived": "Ich habe deine Geschichte verstanden! Ich werde sie in etwas Magisches verwandeln!"
+  }
+}

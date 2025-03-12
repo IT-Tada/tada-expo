@@ -1,0 +1,114 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "error": "Error",
+    "success": "Success",
+    "loading": "Loading...",
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "upgrade": "Upgrade to Premium",
+    "confirm": "Confirm",
+    "retry": "Try Again"
+  },
+  "preferences": {
+    "title": "Preferences",
+    "language": {
+      "title": "Language",
+      "select": "Select language"
+    },
+    "age": {
+      "title": "Age Range",
+      "ranges": {
+        "under-18": "Under 18 years",
+        "18-25": "18-25 years",
+        "26-35": "26-35 years",
+        "36-50": "36-50 years",
+        "50-plus": "50+ years"
+      }
+    },
+    "errors": {
+      "selectAge": "Please select an age range",
+      "saveFailed": "Failed to save preferences"
+    }
+  },
+  "speech": {
+    "start": "Press to start",
+    "listening": "Listening...",
+    "processing": "Creating your story...",
+    "confirm": "Is this what you want?",
+    "complete": "Your story is ready!",
+    "prompts": {
+      "theme": "What kind of story would you like?",
+      "characters": "Who are the main characters?",
+      "setting": "Where does the story take place?",
+      "conflict": "What's the main challenge or adventure?"
+    },
+    "labels": {
+      "theme": "Theme",
+      "characters": "Characters",
+      "setting": "Setting",
+      "conflict": "Challenge"
+    }
+  },
+  "home": {
+    "title": "Magic Story Generator",
+    "pressToSpeak": "Press to speak",
+    "listening": "Listening...",
+    "remainingStories": "Remaining stories",
+    "magicUniverses": "Magic Universes",
+    "speechUnavailable": "Speech synthesis is not available on your device",
+    "selectUniverse": "Please select a magic universe for your story first!",
+    "listeningPrompt": "I'm listening! Tell me your story...",
+    "storyReceived": "I understood your story! I'll transform it into something magical!"
+  },
+  "universes": {
+    "space": {
+      "name": "Space",
+      "description": "Explore the mysteries of the universe with extraordinary space adventures."
+    },
+    "fairy": {
+      "name": "Fairies",
+      "description": "Discover a magical world filled with fairies and enchanted creatures."
+    },
+    "pirates": {
+      "name": "Pirates",
+      "description": "Embark on thrilling adventures at sea with intrepid pirates."
+    },
+    "dragons": {
+      "name": "Dragons",
+      "description": "Live epic adventures in a world populated by majestic dragons."
+    }
+  },
+  "account": {
+    "title": "Account",
+    "guestMessage": "Sign in to access more stories",
+    "welcomeBack": "Welcome back",
+    "premiumFeatures": "Premium Features",
+    "premiumDescription": "Unlock all stories and exclusive content",
+    "currentPlan": "Current Plan",
+    "free": "Free",
+    "premium": "Premium",
+    "switchToLogin": "Already have an account? Login",
+    "switchToSignup": "Don't have an account? Sign up",
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "emailNotConfirmed": "Please check your email to confirm your account"
+    },
+    "stories": {
+      "free": "Free Stories",
+      "premium": "Premium Stories",
+      "locked": "Locked Content"
+    }
+  },
+  "tabs": {
+    "home": "Home",
+    "stories": "Stories",
+    "create": "Create",
+    "profile": "Profile",
+    "account": "Account"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "error": "Erreur",
+    "success": "Succès",
+    "loading": "Chargement..."
+  },
+  "preferences": {
+    "title": "Préférences",
+    "language": {
+      "title": "Langue",
+      "select": "Sélectionner la langue"
+    },
+    "age": {
+      "title": "Tranche d'âge",
+      "ranges": {
+        "under-18": "Moins de 18 ans",
+        "18-25": "18-25 ans",
+        "26-35": "26-35 ans",
+        "36-50": "36-50 ans",
+        "50-plus": "50 ans et plus"
+      }
+    },
+    "errors": {
+      "selectAge": "Veuillez sélectionner une tranche d'âge",
+      "saveFailed": "Échec de la sauvegarde des préférences"
+    }
+  },
+  "home": {
+    "title": "Générateur d'Histoires Magiques",
+    "pressToSpeak": "Appuyez pour parler",
+    "listening": "J'écoute...",
+    "remainingStories": "Histoires restantes",
+    "magicUniverses": "Univers Magiques",
+    "speechUnavailable": "La synthèse vocale n'est pas disponible sur votre appareil",
+    "selectUniverse": "Choisis d'abord un univers magique pour ton histoire !",
+    "listeningPrompt": "Je t'écoute ! Raconte-moi ton histoire...",
+    "storyReceived": "J'ai bien compris ton histoire ! Je vais la transformer en quelque chose de magique !"
+  },
+  "universes": {
+    "space": {
+      "name": "Espace",
+      "description": "Explore les mystères de l'univers avec des aventures spatiales extraordinaires."
+    },
+    "fairy": {
+      "name": "Fées",
+      "description": "Découvre un monde magique rempli de fées et de créatures enchantées."
+    },
+    "pirates": {
+      "name": "Pirates",
+      "description": "Embarque pour des aventures palpitantes sur les mers avec des pirates intrépides."
+    },
+    "dragons": {
+      "name": "Dragons",
+      "description": "Vis des aventures épiques dans un monde peuplé de dragons majestueux."
+    }
+  }
+}
