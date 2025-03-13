@@ -21,7 +21,6 @@ import AnimatedReanimated, {
   useAnimatedStyle,
   useSharedValue,
   withSequence,
-  withTiming,
 } from 'react-native-reanimated';
 import { BlurView } from 'expo-blur';
 
@@ -72,21 +71,6 @@ export function SpeechFlow({ onStoryGenerated, onError }: SpeechFlowProps) {
     conflict: t('speech.prompts.conflict'),
   };
 
-  const pulseAnimation = useSharedValue(1);
-const rotateAnimation = useSharedValue(0);
-
-useEffect(() => {
-  // Start continuous pulse animation
-  pulseAnimation.value = withRepeat(
-    withSequence(
-      withTiming(1.1, { duration: 1000 }),
-      withTiming(1, { duration: 1000 })
-    ),
-    -1, // Infinite repeat
-    true // Reverse
-  );
-}, []);
-
   // Initialize Web Audio API and request permissions
   useEffect(() => {
     if (Platform.OS === 'web') {
@@ -127,15 +111,6 @@ useEffect(() => {
   // Animated waveform style
   const waveformStyle = useAnimatedStyle(() => ({
     transform: [{ scale: waveformAnimation.value }],
-  }));
-
-  // Listening state UI
-  const pulseStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: pulseAnimation.value }],
-  }));
-
-  const rotateStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${rotateAnimation.value}deg` }],
   }));
 
   // Audio visualization
@@ -316,32 +291,12 @@ useEffect(() => {
 {step === 'listening' && (
   <View style={styles.listeningContainer}>
     <Pressable onPress={stopListening}>
-      <Animated.View style={[styles.outerWaveform, pulseStyle]}>
-        <Animated.View style={[styles.waveformContainer, waveformStyle]}>
+                  <AnimatedReanimated.View style={[styles.waveformContainer, waveformStyle]}>
           <Volume2 size={48} color="#FF6B6B" />
-        </Animated.View>
-      </Animated.View>
+                  </AnimatedReanimated.View>
     </Pressable>
-    <Animated.Text style={[styles.promptText, { 
-      fontFamily: 'Nunito-ExtraBold',
-      fontSize: 22,
-    }]}>
-      {currentPrompt}
-    </Animated.Text>
-    <Text style={[styles.stopHint, {
-      fontFamily: 'Quicksand-Regular',
-      fontSize: 16
-    }]}>
-      {t('speech.tapToStop')}
-    </Text>
-    
-    {/* Add friendly character illustrations */}
-    <View style={styles.characterContainer}>
-      <Animated.Image 
-        source={{ uri: 'https://cdn-icons-png.flaticon.com/512/4725/4725694.png' }}
-        style={[styles.characterImage, rotateStyle]}
-      />
-    </View>
+                <Text style={styles.promptText}>{currentPrompt}</Text>
+                <Text style={styles.stopHint}>{t('speech.tapToStop')}</Text>
   </View>
 )}
 
@@ -488,6 +443,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 20,
   },
+  waveformContainer: {
+    padding: 20,
+    borderRadius: 40,
+    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+  },
+  promptText: {
+    fontFamily: 'Quicksand-Bold',
+    fontSize: 18,
+    color: '#333',
+    textAlign: 'center',
+  },
   stopHint: {
     fontFamily: 'Quicksand-Regular',
     fontSize: 14,
@@ -580,33 +546,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#FF3B30',
     textAlign: 'center',
-  },
-  outerWaveform: {
-    padding: 10,
-    borderRadius: 50,
-    backgroundColor: 'rgba(255, 107, 107, 0.1)',
-  },
-  waveformContainer: {
-    padding: 20,
-    borderRadius: 40,
-    backgroundColor: 'rgba(255, 107, 107, 0.3)',
-  },
-  characterContainer: {
-    position: 'absolute',
-    bottom: -20,
-    right: -20,
-    zIndex: -1,
-  },
-  characterImage: {
-    width: 120,
-    height: 120,
-    opacity: 0.8,
-  },
-  promptText: {
-    fontFamily: 'Nunito-ExtraBold',
-    fontSize: 22,
-    color: '#333',
-    textAlign: 'center',
-    marginTop: 20,
   },
 });
