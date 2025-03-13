@@ -8,9 +8,16 @@ import { useStoryStore } from '../store/useStoryStore';
 import { PreferencesModal } from '../components/PreferencesModal';
 import { useTranslation } from 'react-i18next';
 import { SpeechFlow } from '../components/SpeechFlow';
+import Animated, { 
+  FadeInDown, 
+  FadeInUp,
+  SlideInRight 
+} from 'react-native-reanimated';
+import { useTheme } from '../context/ThemeContext';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
+  const theme = useTheme();
   const { userPreferences, remainingStories, selectedUniverse, setSelectedUniverse } =
     useStoryStore();
   const [showPreferences, setShowPreferences] = useState(!userPreferences.ageRange);
@@ -34,7 +41,10 @@ export default function HomeScreen() {
 
   return (
     <ScrollView style={styles.scroll}>
-      <LinearGradient colors={['#FFE5E5', '#FFF5F5']} style={styles.container}>
+      <LinearGradient 
+        colors={[theme.background.start, theme.background.end]} 
+        style={styles.container}
+      >
         <View style={styles.header}>
           <Pressable
             style={styles.settingsButton}
@@ -42,44 +52,69 @@ export default function HomeScreen() {
             <Settings size={24} color="#666" />
           </Pressable>
         </View>
-
+  
+        <Animated.View 
+          entering={FadeInDown.delay(300).springify()} 
+          style={styles.welcomeContainer}
+        >
+          <Text style={styles.welcomeText}>
+            {t('home.title')}
+          </Text>
+          <Text style={styles.welcomeSubtext}>
+            {t('home.magicUniverses')}
+          </Text>
+        </Animated.View>
+  
         <View style={styles.mainContent}>
-          <View style={styles.speechFlowContainer}>
+          <Animated.View 
+            entering={FadeInUp.delay(600).springify()}
+            style={styles.speechFlowContainer}
+          >
             <SpeechFlow
               onStoryGenerated={handleStoryGenerated}
               onError={handleError}
             />
-          </View>
-
+          </Animated.View>
+  
           {feedback && (
-            <View style={styles.feedbackContainer}>
+            <Animated.View 
+              entering={SlideInRight}
+              style={styles.feedbackContainer}
+            >
               <Text style={styles.feedback}>{feedback}</Text>
-            </View>
+            </Animated.View>
           )}
-
-          <View style={styles.statsContainer}>
+  
+          <Animated.View 
+            entering={FadeInUp.delay(900).springify()}
+            style={styles.statsContainer}
+          >
             <View style={styles.statItem}>
               <Star size={24} color="#FFD700" />
               <Text style={styles.statValue}>{remainingStories}</Text>
               <Text style={styles.statLabel}>{t('home.remainingStories')}</Text>
             </View>
-          </View>
-
-          <View style={styles.universeGrid}>
+          </Animated.View>
+  
+          <Animated.View 
+            entering={FadeInUp.delay(1200).springify()}
+            style={styles.universeGrid}
+          >
             <Text style={styles.sectionTitle}>{t('home.magicUniverses')}</Text>
             <View style={styles.grid}>
-              {universes.map((universe) => (
+              {universes.map((universe, index) => (
                 <UniverseCard
                   key={universe.id}
                   universe={universe}
                   onSelect={setSelectedUniverse}
                   isSelected={selectedUniverse?.id === universe.id}
+                  index={index}
                 />
               ))}
             </View>
-          </View>
+          </Animated.View>
         </View>
-
+  
         <PreferencesModal
           visible={showPreferences}
           onClose={() => setShowPreferences(false)}
@@ -181,5 +216,23 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
+  },
+  welcomeContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+    paddingHorizontal: 20,
+  },
+  welcomeText: {
+    fontFamily: 'Nunito-ExtraBold',
+    fontSize: 28,
+    color: '#333',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  welcomeSubtext: {
+    fontFamily: 'Quicksand-Regular',
+    fontSize: 18,
+    color: '#666',
+    textAlign: 'center',
   },
 });

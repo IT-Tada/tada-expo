@@ -9,6 +9,7 @@
     "lint": "expo lint"
   },
   "dependencies": {
+    "@expo-google-fonts/nunito": "^0.2.3",
     "@expo-google-fonts/quicksand": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
     "@lucide/lab": "^0.1.2",

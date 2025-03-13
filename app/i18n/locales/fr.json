@@ -4,7 +4,15 @@
     "cancel": "Annuler",
     "error": "Erreur",
     "success": "Succès",
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "login": "Connexion",
+    "signup": "S'inscrire",
+    "logout": "Déconnexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "upgrade": "Passer à Premium",
+    "confirm": "Confirmer",
+    "retry": "Réessayer"
   },
   "preferences": {
     "title": "Préférences",
@@ -15,16 +23,40 @@
     "age": {
       "title": "Tranche d'âge",
       "ranges": {
-        "under-18": "Moins de 18 ans",
-        "18-25": "18-25 ans",
-        "26-35": "26-35 ans",
-        "36-50": "36-50 ans",
-        "50-plus": "50 ans et plus"
+        "under-3": "Moins de 3 ans",
+        "3-5": "3-5 ans",
+        "6-9": "6-9 ans",
+        "10-15": "10-15 ans",
+        "16-plus": "16 ans et plus"
       }
     },
     "errors": {
       "selectAge": "Veuillez sélectionner une tranche d'âge",
       "saveFailed": "Échec de la sauvegarde des préférences"
+    }
+  },
+  "speech": {
+    "start": "Appuyer pour commencer",
+    "listening": "J'écoute...",
+    "processing": "Création de ton histoire...",
+    "confirm": "Est-ce bien ce que tu veux ?",
+    "complete": "Ton histoire est prête !",
+    "tapToStop": "Touche pour arrêter",
+    "prompts": {
+      "theme": "Quel type d'histoire aimerais-tu ?",
+      "characters": "Qui sont les personnages principaux ?",
+      "setting": "Où se déroule l'histoire ?",
+      "conflict": "Quel est le défi ou l'aventure principale ?"
+    },
+    "labels": {
+      "theme": "Thème",
+      "characters": "Personnages",
+      "setting": "Lieu",
+      "conflict": "Défi"
+    },
+    "errors": {
+      "noPermission": "Permission de microphone refusée",
+      "recognition": "Erreur de reconnaissance vocale"
     }
   },
   "home": {
@@ -55,5 +87,33 @@
       "name": "Dragons",
       "description": "Vis des aventures épiques dans un monde peuplé de dragons majestueux."
     }
+  },
+  "account": {
+    "title": "Compte",
+    "guestMessage": "Connecte-toi pour accéder à plus d'histoires",
+    "welcomeBack": "Bon retour",
+    "premiumFeatures": "Fonctionnalités Premium",
+    "premiumDescription": "Débloquer toutes les histoires et le contenu exclusif",
+    "currentPlan": "Forfait actuel",
+    "free": "Gratuit",
+    "premium": "Premium",
+    "switchToLogin": "Tu as déjà un compte ? Connecte-toi",
+    "switchToSignup": "Tu n'as pas de compte ? Inscris-toi",
+    "errors": {
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "emailNotConfirmed": "Vérifie ton email pour confirmer ton compte"
+    },
+    "stories": {
+      "free": "Histoires gratuites",
+      "premium": "Histoires Premium",
+      "locked": "Contenu verrouillé"
+    }
+  },
+  "tabs": {
+    "home": "Accueil",
+    "stories": "Histoires",
+    "create": "Créer",
+    "profile": "Profil",
+    "account": "Compte"
   }
 }

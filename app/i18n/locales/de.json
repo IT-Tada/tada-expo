@@ -4,7 +4,15 @@
     "cancel": "Abbrechen",
     "error": "Fehler",
     "success": "Erfolg",
-    "loading": "Laden..."
+    "loading": "Laden...",
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "logout": "Abmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "upgrade": "Auf Premium upgraden",
+    "confirm": "Bestätigen",
+    "retry": "Erneut versuchen"
   },
   "preferences": {
     "title": "Einstellungen",
@@ -27,6 +35,30 @@
       "saveFailed": "Fehler beim Speichern der Einstellungen"
     }
   },
+  "speech": {
+    "start": "Drücken zum Starten",
+    "listening": "Ich höre zu...",
+    "processing": "Erstelle deine Geschichte...",
+    "confirm": "Ist das was du möchtest?",
+    "complete": "Deine Geschichte ist fertig!",
+    "tapToStop": "Tippen zum Stoppen",
+    "prompts": {
+      "theme": "Welche Art von Geschichte möchtest du?",
+      "characters": "Wer sind die Hauptfiguren?",
+      "setting": "Wo findet die Geschichte statt?",
+      "conflict": "Was ist die Hauptherausforderung oder das Abenteuer?"
+    },
+    "labels": {
+      "theme": "Thema",
+      "characters": "Charaktere",
+      "setting": "Schauplatz",
+      "conflict": "Herausforderung"
+    },
+    "errors": {
+      "noPermission": "Mikrofonzugriff verweigert",
+      "recognition": "Fehler bei der Spracherkennung"
+    }
+  },
   "home": {
     "title": "Magischer Geschichtengenerator",
     "pressToSpeak": "Zum Sprechen drücken",
@@ -37,5 +69,51 @@
     "selectUniverse": "Wähle zuerst ein magisches Universum für deine Geschichte!",
     "listeningPrompt": "Ich höre zu! Erzähl mir deine Geschichte...",
     "storyReceived": "Ich habe deine Geschichte verstanden! Ich werde sie in etwas Magisches verwandeln!"
+  },
+  "universes": {
+    "space": {
+      "name": "Weltraum",
+      "description": "Entdecke die Geheimnisse des Universums mit außergewöhnlichen Weltraumabenteuern."
+    },
+    "fairy": {
+      "name": "Feen",
+      "description": "Entdecke eine magische Welt voller Feen und verzauberter Kreaturen."
+    },
+    "pirates": {
+      "name": "Piraten",
+      "description": "Begib dich auf spannende Abenteuer auf See mit unerschrockenen Piraten."
+    },
+    "dragons": {
+      "name": "Drachen",
+      "description": "Erlebe epische Abenteuer in einer Welt voller majestätischer Drachen."
+    }
+  },
+  "account": {
+    "title": "Konto",
+    "guestMessage": "Melde dich an, um auf mehr Geschichten zuzugreifen",
+    "welcomeBack": "Willkommen zurück",
+    "premiumFeatures": "Premium-Funktionen",
+    "premiumDescription": "Schalte alle Geschichten und exklusive Inhalte frei",
+    "currentPlan": "Aktueller Plan",
+    "free": "Kostenlos",
+    "premium": "Premium",
+    "switchToLogin": "Hast du bereits ein Konto? Anmelden",
+    "switchToSignup": "Kein Konto? Registrieren",
+    "errors": {
+      "invalidCredentials": "Ungültige E-Mail oder Passwort",
+      "emailNotConfirmed": "Bitte überprüfe deine E-Mail, um dein Konto zu bestätigen"
+    },
+    "stories": {
+      "free": "Kostenlose Geschichten",
+      "premium": "Premium Geschichten",
+      "locked": "Gesperrte Inhalte"
+    }
+  },
+  "tabs": {
+    "home": "Start",
+    "stories": "Geschichten",
+    "create": "Erstellen",
+    "profile": "Profil",
+    "account": "Konto"
   }
 }

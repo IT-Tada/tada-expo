@@ -4,7 +4,15 @@
     "cancel": "Cancelar",
     "error": "Error",
     "success": "Éxito",
-    "loading": "Cargando..."
+    "loading": "Cargando...",
+    "login": "Iniciar Sesión",
+    "signup": "Registrarse",
+    "logout": "Cerrar Sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "upgrade": "Mejorar a Premium",
+    "confirm": "Confirmar",
+    "retry": "Intentar de nuevo"
   },
   "preferences": {
     "title": "Preferencias",
@@ -27,6 +35,30 @@
       "saveFailed": "Error al guardar las preferencias"
     }
   },
+  "speech": {
+    "start": "Presiona para comenzar",
+    "listening": "Escuchando...",
+    "processing": "Creando tu historia...",
+    "confirm": "¿Es esto lo que quieres?",
+    "complete": "¡Tu historia está lista!",
+    "tapToStop": "Toca para detener",
+    "prompts": {
+      "theme": "¿Qué tipo de historia te gustaría?",
+      "characters": "¿Quiénes son los personajes principales?",
+      "setting": "¿Dónde ocurre la historia?",
+      "conflict": "¿Cuál es el desafío o aventura principal?"
+    },
+    "labels": {
+      "theme": "Tema",
+      "characters": "Personajes",
+      "setting": "Escenario",
+      "conflict": "Desafío"
+    },
+    "errors": {
+      "noPermission": "Permiso de micrófono denegado",
+      "recognition": "Error de reconocimiento de voz"
+    }
+  },
   "home": {
     "title": "Generador de Historias Mágicas",
     "pressToSpeak": "Presiona para hablar",
@@ -37,5 +69,51 @@
     "selectUniverse": "¡Primero selecciona un universo mágico para tu historia!",
     "listeningPrompt": "¡Te escucho! Cuéntame tu historia...",
     "storyReceived": "¡He entendido tu historia! ¡La transformaré en algo mágico!"
+  },
+  "universes": {
+    "space": {
+      "name": "Espacio",
+      "description": "Explora los misterios del universo con extraordinarias aventuras espaciales."
+    },
+    "fairy": {
+      "name": "Hadas",
+      "description": "Descubre un mundo mágico lleno de hadas y criaturas encantadas."
+    },
+    "pirates": {
+      "name": "Piratas",
+      "description": "Embárcate en emocionantes aventuras en el mar con intrépidos piratas."
+    },
+    "dragons": {
+      "name": "Dragones",
+      "description": "Vive aventuras épicas en un mundo poblado por majestuosos dragones."
+    }
+  },
+  "account": {
+    "title": "Cuenta",
+    "guestMessage": "Inicia sesión para acceder a más historias",
+    "welcomeBack": "Bienvenido de nuevo",
+    "premiumFeatures": "Características Premium",
+    "premiumDescription": "Desbloquea todas las historias y contenido exclusivo",
+    "currentPlan": "Plan Actual",
+    "free": "Gratis",
+    "premium": "Premium",
+    "switchToLogin": "¿Ya tienes una cuenta? Inicia sesión",
+    "switchToSignup": "¿No tienes una cuenta? Regístrate",
+    "errors": {
+      "invalidCredentials": "Correo o contraseña inválidos",
+      "emailNotConfirmed": "Por favor revisa tu correo para confirmar tu cuenta"
+    },
+    "stories": {
+      "free": "Historias Gratuitas",
+      "premium": "Historias Premium",
+      "locked": "Contenido Bloqueado"
+    }
+  },
+  "tabs": {
+    "home": "Inicio",
+    "stories": "Historias",
+    "create": "Crear",
+    "profile": "Perfil",
+    "account": "Cuenta"
   }
 }

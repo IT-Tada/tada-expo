@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SUPPORTED_LANGUAGES, changeLanguage, type SupportedLanguage } from '../i18n';
 import Animated, { 
   useSharedValue, 
   useAnimatedStyle, 
@@ -9,45 +8,76 @@ import Animated, {
   FadeInDown, 
   ZoomIn
 } from 'react-native-reanimated';
-import { useStoryStore } from '../store/useStoryStore';
+import { AgeRange, useStoryStore } from '../store/useStoryStore';
 
-// Flag image mapping using CDN URLs
-const languageFlags: Record<string, string> = {
-  'en-US': 'https://flagcdn.com/w160/us.png',
-  'fr-FR': 'https://flagcdn.com/w160/fr.png',
-  'es-ES': 'https://flagcdn.com/w160/es.png',
-  'de-DE': 'https://flagcdn.com/w160/de.png',
-  'ar-SA': 'https://flagcdn.com/w160/sa.png',
-};
+// Age-specific icons and illustrations
+const ageIcons: Record<string, { icon: string, color: string }> = {
+    'under-3': { 
+      icon: '👶', 
+      color: '#FFB6C1' // Light pink
+    },
+    '3-5': { 
+      icon: '🧒', 
+      color: '#FFD700' // Gold
+    },
+    '6-9': { 
+      icon: '👦', 
+      color: '#87CEFA' // Light sky blue
+    },
+    '10-15': { 
+      icon: '🧑', 
+      color: '#98FB98' // Pale green
+    },
+    '16-plus': { 
+      icon: '🧓', 
+      color: '#DDA0DD' // Light purple
+    },
+  };
+  
+  // Fun animal companions for each age group
+  const ageAnimals: Record<string, string> = {
+    'under-3': '🐣', // Baby chick
+    '3-5': '🐶', // Puppy
+    '6-9': '🐱', // Kitten
+    '10-15': '🦊', // Fox
+    '16-plus': '🦉', // Owl
+  };
+  
+  const AGE_RANGES: { value: AgeRange; label: string }[] = [
+    { value: 'under-3', label: 'preferences.age.ranges.under-3' },
+    { value: '3-5', label: 'preferences.age.ranges.3-5' },
+    { value: '6-9', label: 'preferences.age.ranges.6-9' },
+    { value: '10-15', label: 'preferences.age.ranges.10-15' },
+    { value: '16-plus', label: 'preferences.age.ranges.16-plus' },
+  ];
 
-// Optional fun animal associations for each language (kids love animals!)
-const languageAnimals: Record<string, string> = {
-  'en-US': '🦅', // Eagle
-  'fr-FR': '🐓', // Rooster (Gallic rooster)
-  'es-ES': '🐂', // Bull
-  'de-DE': '🦁', // Lion (from coat of arms)
-  'ar-SA': '🐪', // Camel
-};
-
-export function LanguageSwitcher() {
-  const { t, i18n } = useTranslation();
+export function AgeSwitcher() {
+    
+  const { t } = useTranslation();
   const { userPreferences, setUserPreferences } = useStoryStore();
-  const currentLanguage = i18n.language as SupportedLanguage;
+  const [selectedAge, setSelectedAge] = useState<AgeRange | null>(
+    userPreferences.ageRange
+  );
 
-  const handleLanguageChange = async (language: SupportedLanguage) => {
+  useEffect(() => {
+    setSelectedAge(userPreferences.ageRange);
+  }, [userPreferences]);
+
+  const handleAgeChange = async (value: AgeRange) => {
     try {
-      await changeLanguage(language);
-      setUserPreferences({language: language});
+      setSelectedAge(value);
+      setUserPreferences({ageRange: value});
     } catch (error) {
-      console.error('Error changing language:', error);
+      console.error('Error changing age:', error);
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.languageGrid}>
-        {Object.entries(SUPPORTED_LANGUAGES).map(([code, lang], index) => {
-          const isSelected = code === currentLanguage;
+      <View style={styles.ageGrid}>
+        {Object.entries(AGE_RANGES).map(([value, range], index) => {
+          const isSelected = range.value === selectedAge;
+          const ageInfo = ageIcons[range.value];
           const scale = useSharedValue(1);
           
           const animatedStyle = useAnimatedStyle(() => {
@@ -58,16 +88,17 @@ export function LanguageSwitcher() {
           
           return (
             <Animated.View 
-              key={code}
+              key={value}
               entering={ZoomIn.delay(index * 150).springify()}
-              style={[styles.languageButtonContainer, animatedStyle]}
+              style={[styles.ageButtonContainer, animatedStyle]}
             >
               <Pressable
                 style={[
-                  styles.languageButton,
-                  isSelected && styles.selectedLanguage,
+                  styles.ageButton,
+                  isSelected && styles.selectedAge,
+                  { backgroundColor: isSelected ? ageInfo.color : '#F8F8F8' }
                 ]}
-                onPress={() => handleLanguageChange(code as SupportedLanguage)}
+                onPress={() => handleAgeChange(range.value as AgeRange)}
                 onPressIn={() => {
                   scale.value = withSpring(0.9);
                 }}
@@ -77,17 +108,13 @@ export function LanguageSwitcher() {
                   });
                 }}
               >
-                <Image 
-                  source={{ uri: languageFlags[code] }}
-                  style={styles.flagImage}
-                  resizeMode="cover"
-                />
+                <Text style={styles.ageEmoji}>{ageInfo.icon}</Text>
                 <Text
                   style={[
-                    styles.languageName,
+                    styles.ageName,
                     isSelected && styles.selectedText,
                   ]}>
-                  {lang.native}
+                  {t(range.label)}
                 </Text>
                 
                 {isSelected && (
@@ -96,7 +123,7 @@ export function LanguageSwitcher() {
                     style={styles.animalContainer}
                   >
                     <Text style={styles.animalEmoji}>
-                      {languageAnimals[code]}
+                      {ageAnimals[value]}
                     </Text>
                   </Animated.View>
                 )}
@@ -119,18 +146,18 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  languageGrid: {
+  ageGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: 16,
+    gap: 12,
   },
-  languageButtonContainer: {
+  ageButtonContainer: {
     width: '30%',
     maxWidth: 160,
     marginBottom: 16,
   },
-  languageButton: {
+  ageButton: {
     backgroundColor: '#F8F8F8',
     borderRadius: 20,
     paddingVertical: 18,
@@ -144,8 +171,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
   },
-  selectedLanguage: {
-    backgroundColor: '#FFE5B4',
+  selectedAge: {
     borderColor: '#FFD166',
     borderWidth: 4,
   },
@@ -161,7 +187,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
   },
-  languageName: {
+  ageName: {
     fontSize: 18,
     fontFamily: 'Quicksand-Bold',
     color: '#333',
@@ -197,5 +223,9 @@ const styles = StyleSheet.create({
   animalEmoji: {
     fontSize: 28,
     transform: [{ rotate: '-20deg' }],
+  },
+  ageEmoji: {
+    fontSize: 36,
+    marginBottom: 8,
   }
 });

@@ -7,20 +7,23 @@ import {
   Modal,
   ScrollView,
   Platform,
+  Image,
 } from 'react-native';
 import { Check, Globe, User } from 'lucide-react-native';
 import { useStoryStore, AgeRange } from '../store/useStoryStore';
 import { BlurView } from 'expo-blur';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import Animated, { 
+  FadeInDown, 
+  ZoomIn,
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withSequence
+} from 'react-native-reanimated';
+import { AgeSwitcher } from './AgeSwitcher';
 
-const AGE_RANGES: { value: AgeRange; label: string }[] = [
-  { value: 'under-18', label: 'preferences.age.ranges.under-3' },
-  { value: '18-25', label: 'preferences.age.ranges.3-5' },
-  { value: '26-35', label: 'preferences.age.ranges.6-9' },
-  { value: '36-50', label: 'preferences.age.ranges.10-15' },
-  { value: '50-plus', label: 'preferences.age.ranges.16-plus' },
-];
 
 interface PreferencesModalProps {
   visible: boolean;
@@ -30,24 +33,13 @@ interface PreferencesModalProps {
 export function PreferencesModal({ visible, onClose }: PreferencesModalProps) {
   const { t } = useTranslation();
   const { userPreferences, setUserPreferences } = useStoryStore();
-  const [selectedAge, setSelectedAge] = useState<AgeRange | null>(
-    userPreferences.ageRange
-  );
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setSelectedAge(userPreferences.ageRange);
-  }, [userPreferences]);
 
   const handleSave = () => {
     try {
-      if (!selectedAge) {
-        setError(t('preferences.errors.selectAge'));
-        return;
-      }
-
+      console.log(userPreferences);
       setUserPreferences({
-        ageRange: selectedAge,
+        ageRange: userPreferences.ageRange,
         language: userPreferences.language,
       });
 
@@ -69,55 +61,49 @@ export function PreferencesModal({ visible, onClose }: PreferencesModalProps) {
         <BlurView intensity={20} style={StyleSheet.absoluteFill} />
         <ScrollView style={styles.scrollView}>
           <View style={styles.modalContent}>
-            <Text style={styles.title}>{t('preferences.title')}</Text>
+            <Animated.Text 
+              entering={ZoomIn.springify()}
+              style={styles.title}
+            >
+              {t('preferences.title')}
+            </Animated.Text>
 
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
-                <User size={24} color="#333" />
+                <Globe size={24} color="#FF6B6B" />
                 <Text style={styles.sectionTitle}>{t('preferences.age.title')}</Text>
               </View>
-              <View style={styles.ageGrid}>
-                {AGE_RANGES.map((range) => (
-                  <Pressable
-                    key={range.value}
-                    style={[
-                      styles.ageOption,
-                      selectedAge === range.value && styles.ageOptionSelected,
-                    ]}
-                    onPress={() => setSelectedAge(range.value)}>
-                    <Text
-                      style={[
-                        styles.ageOptionText,
-                        selectedAge === range.value && styles.ageOptionTextSelected,
-                      ]}>
-                      {t(range.label)}
-                    </Text>
-                    {selectedAge === range.value && (
-                      <Check size={16} color="#FFF" style={styles.checkIcon} />
-                    )}
-                  </Pressable>
-                ))}
-              </View>
+              <AgeSwitcher />
             </View>
 
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
-                <Globe size={24} color="#333" />
+                <Globe size={24} color="#FF6B6B" />
                 <Text style={styles.sectionTitle}>{t('preferences.language.title')}</Text>
               </View>
               <LanguageSwitcher />
             </View>
 
-            {error && <Text style={styles.error}>{error}</Text>}
+            {error && (
+              <Animated.Text 
+                entering={FadeInDown}
+                style={styles.error}
+              >
+                {error}
+              </Animated.Text>
+            )}
 
-            <View style={styles.buttonContainer}>
+            <Animated.View 
+              entering={FadeInDown.delay(1200)}
+              style={styles.buttonContainer}
+            >
               <Pressable style={styles.cancelButton} onPress={onClose}>
                 <Text style={styles.cancelButtonText}>{t('common.cancel')}</Text>
               </Pressable>
               <Pressable style={styles.saveButton} onPress={handleSave}>
                 <Text style={styles.saveButtonText}>{t('common.save')}</Text>
               </Pressable>
-            </View>
+            </Animated.View>
           </View>
         </ScrollView>
       </View>
@@ -138,18 +124,20 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#FFF',
-    borderRadius: 20,
-    padding: 20,
+    borderRadius: 24,
+    padding: 24,
     margin: 20,
     width: 'auto',
     maxWidth: 500,
     alignSelf: 'center',
+    borderWidth: 3,
+    borderColor: '#FFD166',
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontFamily: 'Quicksand-Bold',
     color: '#333',
-    marginBottom: 20,
+    marginBottom: 24,
     textAlign: 'center',
   },
   section: {
@@ -158,43 +146,75 @@ const styles = StyleSheet.create({
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 16,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: 'Quicksand-Bold',
     color: '#333',
-    marginLeft: 8,
+    marginLeft: 10,
   },
   ageGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 10,
+    justifyContent: 'space-between',
+    gap: 12,
   },
   ageOption: {
-    flex: 1,
-    minWidth: '45%',
-    backgroundColor: '#F5F5F5',
-    borderRadius: 12,
-    padding: 12,
+    width: '100%',
+    borderRadius: 16,
+    padding: 16,
     alignItems: 'center',
-    flexDirection: 'row',
     justifyContent: 'center',
+    minHeight: 100,
+    borderWidth: 2,
+    borderColor: '#E0E0E0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+    marginBottom: 8,
   },
-  ageOptionSelected: {
-    backgroundColor: '#FF6B6B',
+  ageEmoji: {
+    fontSize: 36,
+    marginBottom: 8,
   },
   ageOptionText: {
-    fontSize: 14,
-    fontFamily: 'Quicksand-Regular',
-    color: '#666',
+    fontSize: 16,
+    fontFamily: 'Quicksand-Bold',
+    color: '#333',
+    textAlign: 'center',
   },
   ageOptionTextSelected: {
-    color: '#FFF',
-    fontFamily: 'Quicksand-Bold',
+    color: '#333',
   },
-  checkIcon: {
-    marginLeft: 8,
+  starBadge: {
+    position: 'absolute',
+    top: -8,
+    right: -8,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: '#FF6B6B',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
+  },
+  starText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  animalContainer: {
+    position: 'absolute',
+    top: -5,
+    left: -5,
+  },
+  animalEmoji: {
+    fontSize: 28,
+    transform: [{ rotate: '-20deg' }],
   },
   error: {
     color: '#FF3B30',
@@ -206,12 +226,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: 12,
+    gap: 16,
+    marginTop: 8,
   },
   cancelButton: {
     flex: 1,
     backgroundColor: '#F5F5F5',
-    borderRadius: 12,
+    borderRadius: 16,
     padding: 16,
     alignItems: 'center',
   },
@@ -223,7 +244,7 @@ const styles = StyleSheet.create({
   saveButton: {
     flex: 1,
     backgroundColor: '#FF6B6B',
-    borderRadius: 12,
+    borderRadius: 16,
     padding: 16,
     alignItems: 'center',
   },

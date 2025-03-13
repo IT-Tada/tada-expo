@@ -23,11 +23,11 @@
     "age": {
       "title": "Age Range",
       "ranges": {
-        "under-18": "Under 18 years",
-        "18-25": "18-25 years",
-        "26-35": "26-35 years",
-        "36-50": "36-50 years",
-        "50-plus": "50+ years"
+        "under-3": "Under 3 years",
+        "3-5": "3-5 years",
+        "6-9": "6-9 years",
+        "10-15": "10-15 years",
+        "16-plus": "16+ years"
       }
     },
     "errors": {
@@ -52,7 +52,12 @@
       "characters": "Characters",
       "setting": "Setting",
       "conflict": "Challenge"
-    }
+    },
+    "errors": {
+      "noPermission": "Microphone permission denied",
+      "recognition": "Speech recognition error"
+    },
+    "tapToStop": "Tap to stop"
   },
   "home": {
     "title": "Magic Story Generator",
