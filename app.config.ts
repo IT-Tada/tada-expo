@@ -2,12 +2,12 @@ import { ExpoConfig, ConfigContext } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: 'Kids Story Generator',
-  slug: 'kids-story-generator',
+  name: 'Tada Story Generator',
+  slug: 'tada-story',
   version: '1.0.0',
   orientation: 'portrait',
   icon: './assets/images/icon.png',
-  scheme: 'myapp',
+  scheme: 'tada',
   userInterfaceStyle: 'automatic',
   splash: {
     image: './assets/images/splash.png',
@@ -16,9 +16,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   assetBundlePatterns: ['**/*'],
   ios: {
+    bundleIdentifier: "com.tada.tadastory",
     supportsTablet: true
   },
   android: {
+    package: "com.tada.tadastory",
     adaptiveIcon: {
       foregroundImage: './assets/images/adaptive-icon.png',
       backgroundColor: '#ffffff'
@@ -27,7 +29,17 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   web: {
     favicon: './assets/images/favicon.png'
   },
-  plugins: ['expo-router'],
+  plugins: [
+    'expo-router',
+    [
+      "expo-speech-recognition",
+      {
+        "microphonePermission": "Allow $(PRODUCT_NAME) to use the microphone.",
+        "speechRecognitionPermission": "Allow $(PRODUCT_NAME) to use speech recognition.",
+        "androidSpeechServicePackages": ["com.google.android.googlequicksearchbox"]
+      }
+    ]
+  ],
   experiments: {
     typedRoutes: true,
   },
@@ -35,5 +47,5 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     supabaseUrl: process.env.EXPO_PUBLIC_SUPABASE_URL,
     supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
   },
-  owner: "stackblitz",
+  owner: "tada",
 });
