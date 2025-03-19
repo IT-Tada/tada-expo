@@ -23,11 +23,11 @@
     "age": {
       "title": "Tranche d'âge",
       "ranges": {
-        "under-3": "Moins de 3 ans",
+        "under-3": "> 3 ans",
         "3-5": "3-5 ans",
         "6-9": "6-9 ans",
         "10-15": "10-15 ans",
-        "16-plus": "16 ans et plus"
+        "16-plus": "> 16 ans"
       }
     },
     "errors": {
