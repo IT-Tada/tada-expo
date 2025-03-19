@@ -225,6 +225,7 @@ export function PaymentOptions({ onPurchase }: PaymentOptionsProps) {
               )}
 
               <View style={styles.planDetails}>
+                <View></View>
                 
                 <View style={styles.planCredits}>
                   <Text style={styles.planName}>{t(plan.name)}</Text>
@@ -494,6 +495,7 @@ const styles = StyleSheet.create({
   },
   planPricing: {
     alignItems: 'flex-end',
+    minWidth: '10%'
   },
   planPrice: {
     fontFamily: 'Nunito-Bold',
