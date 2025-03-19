@@ -89,24 +89,62 @@
     }
   },
   "account": {
-    "title": "Konto",
-    "guestMessage": "Melde dich an, um auf mehr Geschichten zuzugreifen",
-    "welcomeBack": "Willkommen zurück",
-    "premiumFeatures": "Premium-Funktionen",
-    "premiumDescription": "Schalte alle Geschichten und exklusive Inhalte frei",
-    "currentPlan": "Aktueller Plan",
-    "free": "Kostenlos",
-    "premium": "Premium",
-    "switchToLogin": "Hast du bereits ein Konto? Anmelden",
-    "switchToSignup": "Kein Konto? Registrieren",
-    "errors": {
-      "invalidCredentials": "Ungültige E-Mail oder Passwort",
-      "emailNotConfirmed": "Bitte überprüfe deine E-Mail, um dein Konto zu bestätigen"
+    "credits": {
+      "available": "Verfügbare Credits",
+      "perMonth": "Credits/Monat",
+      "unit": "Credits",
+      "status": {
+        "healthy": "Gut",
+        "low": "Niedrig",
+        "critical": "Kritisch"
+      },
+      "lowWarning": "Du hast nur noch wenige Credits übrig. Füge mehr hinzu, um weiterhin Geschichten zu erstellen!"
     },
-    "stories": {
-      "free": "Kostenlose Geschichten",
-      "premium": "Premium Geschichten",
-      "locked": "Gesperrte Inhalte"
+    "getMoreCredits": "Mehr Credits erhalten",
+    "oneTimePurchase": "Einmaliger Kauf",
+    
+    "mostPopular": "Am beliebtesten",
+    "bestValue": "Bestes Angebot",
+    "save": "Spare",
+    "savePercent": "Spare {{percent}}%",
+    "buyNow": "Jetzt kaufen",
+    "startSubscription": "Abonnement starten",
+    "securePayment": "Sichere Zahlung abgewickelt durch Stripe",
+    "billingHistory": "Abrechnungsverlauf",
+    "noTransactions": "Noch keine Transaktionen",
+    "viewHistory": "Kaufverlauf anzeigen",
+    "welcome": "Willkommen",
+    "plan": "Plan",
+    "processing": "Dein Kauf wird bearbeitet...",
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "credits": {
+        "question": "Wofür werden Credits verwendet?",
+        "answer": "Mit Credits kannst du neue Geschichten generieren. Jede Geschichte kostet 1 Credit. Premium-Abonnenten erhalten zudem automatisch monatliche Credits."
+      },
+      "subscription": {
+        "question": "Wie funktionieren Abonnements?",
+        "answer": "Abonnements bieten dir automatisch Credits jeden Monat und geben dir Zugang zu Premium-Funktionen. Monatliche Abonnenten erhalten 20 Credits/Monat, während jährliche Abonnenten 30 Credits/Monat bekommen."
+      },
+      "cancel": {
+        "question": "Wie kann ich mein Abonnement kündigen?",
+        "answer": "Du kannst dein Abonnement jederzeit in deinen Kontoeinstellungen kündigen. Du behältst den Zugang bis zum Ende deiner Abrechnungsperiode."
+      },
+      "refund": {
+        "question": "Kann ich eine Rückerstattung erhalten?",
+        "answer": "Wir bieten Rückerstattungen innerhalb von 7 Tagen nach dem Kauf an, wenn du keine Credits verwendet hast. Kontaktiere unser Support-Team für Unterstützung."
+      }
+    },
+    "subscription": {
+      "title": "Abonnement",
+      "monthly": {
+        "name": "Monatlich",
+        "period": "pro Monat"
+      },
+      "annual": {
+        "name": "Jährlich",
+        "period": "pro Monat, jährlich abgerechnet"
+      }
     }
   },
   "tabs": {
