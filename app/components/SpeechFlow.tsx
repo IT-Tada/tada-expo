@@ -286,7 +286,9 @@ export function SpeechFlow({ onStoryGenerated, onError }: SpeechFlowProps) {
 
     try {
       // Play confirmation sound
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      if (Platform.OS !== 'web') {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      }
 
       // Simulate API call or use actual API to generate story
       await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -334,14 +336,6 @@ export function SpeechFlow({ onStoryGenerated, onError }: SpeechFlowProps) {
 
   return (
     <View style={styles.container}>
-      {speechFailed && (
-        <Animated.View entering={FadeIn} style={styles.speechFallbackContainer}>
-          <Text style={styles.speechFallbackText}>
-            {step === 'listening' ? t('speech.listening') : t('speech.fallback')}
-          </Text>
-        </Animated.View>
-      )}
-
       <AnimatedBlurView
         intensity={20}
         style={[styles.content, step === 'processing' && styles.processing]}
@@ -383,7 +377,6 @@ export function SpeechFlow({ onStoryGenerated, onError }: SpeechFlowProps) {
                       <Mic size={48} color="#FFF" />
                     </View>
                   </Animated.View>
-                  <Text style={styles.micText}>{t('speech.start')}</Text>
                 </Pressable>
               </View>
             )}
