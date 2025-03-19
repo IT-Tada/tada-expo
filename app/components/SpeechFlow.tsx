@@ -147,67 +147,67 @@ export function SpeechFlow({ onStoryGenerated, onError }: SpeechFlowProps) {
   });
 
   // Enhanced voice guidance function with fallback system
-  const provideVoiceGuidance = async (text: string) => {
-    try {
-      // Always make sure to stop any current speech first
-      if (await Speech.isSpeakingAsync()) {
-        await Speech.stop();
-      }
+  // const provideVoiceGuidance = async (text: string) => {
+  //   try {
+  //     // Always make sure to stop any current speech first
+  //     if (await Speech.isSpeakingAsync()) {
+  //       await Speech.stop();
+  //     }
 
-      // For iOS, use the Audio library to ensure speech works in silent mode
-      if (Platform.OS === 'ios') {
-        // Set up audio session to play in silent mode
-        await Audio.setAudioModeAsync({
-          playsInSilentModeIOS: true,
-          staysActiveInBackground: true,
-          // interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
-          // interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
-        });
-      }
+  //     // For iOS, use the Audio library to ensure speech works in silent mode
+  //     if (Platform.OS === 'ios') {
+  //       // Set up audio session to play in silent mode
+  //       await Audio.setAudioModeAsync({
+  //         playsInSilentModeIOS: true,
+  //         staysActiveInBackground: true,
+  //         // interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
+  //         // interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+  //       });
+  //     }
 
-      // Remove any HTML-like content from the text
-      const cleanText = text.replace(/<[^>]*>/g, '');
+  //     // Remove any HTML-like content from the text
+  //     const cleanText = text.replace(/<[^>]*>/g, '');
 
-      // Safer speech options with fallback
-      Speech.speak(cleanText, {
-        language: userPreferences.language || 'en-US', // Fallback to English
-        pitch: 1.0, // More standard pitch to avoid issues
-        rate: 0.9, // Slightly slower but not too extreme
-        onError: (error) => {
-          console.error('Speech synthesis error:', error);
-          setSpeechFailed(true);
-          // Try again with more basic settings if it fails
-          try {
-            Speech.speak(cleanText, {
-              language: 'en-US',
-              pitch: 1.0,
-              rate: 1.0,
-            });
-          } catch (e) {
-            console.error('Fallback speech failed:', e);
-            // Keep speechFailed true for visual fallback
-            setTimeout(() => setSpeechFailed(false), 5000);
-          }
-        },
-      });
-    } catch (error) {
-      console.error('Voice guidance error:', error);
-      setSpeechFailed(true);
-      // Reset after some time
-      setTimeout(() => setSpeechFailed(false), 5000);
-    }
-  };
+  //     // Safer speech options with fallback
+  //     Speech.speak(cleanText, {
+  //       language: userPreferences.language || 'en-US', // Fallback to English
+  //       pitch: 1.0, // More standard pitch to avoid issues
+  //       rate: 0.9, // Slightly slower but not too extreme
+  //       onError: (error) => {
+  //         console.error('Speech synthesis error:', error);
+  //         setSpeechFailed(true);
+  //         // Try again with more basic settings if it fails
+  //         try {
+  //           Speech.speak(cleanText, {
+  //             language: 'en-US',
+  //             pitch: 1.0,
+  //             rate: 1.0,
+  //           });
+  //         } catch (e) {
+  //           console.error('Fallback speech failed:', e);
+  //           // Keep speechFailed true for visual fallback
+  //           setTimeout(() => setSpeechFailed(false), 5000);
+  //         }
+  //       },
+  //     });
+  //   } catch (error) {
+  //     console.error('Voice guidance error:', error);
+  //     setSpeechFailed(true);
+  //     // Reset after some time
+  //     setTimeout(() => setSpeechFailed(false), 5000);
+  //   }
+  // };
 
   // Voice guidance on step change
-  useEffect(() => {
-    if (step === 'idle') {
-      provideVoiceGuidance(t('speech.start'));
-    } else if (step === 'listening') {
-      provideVoiceGuidance(t('speech.listening'));
-    } else if (step === 'complete') {
-      provideVoiceGuidance(t('speech.complete'));
-    }
-  }, [step, t]);
+  // useEffect(() => {
+  //   if (step === 'idle') {
+  //     provideVoiceGuidance(t('speech.start'));
+  //   } else if (step === 'listening') {
+  //     provideVoiceGuidance(t('speech.listening'));
+  //   } else if (step === 'complete') {
+  //     provideVoiceGuidance(t('speech.complete'));
+  //   }
+  // }, [step, t]);
 
   const startRecognition = async () => {
     try {
