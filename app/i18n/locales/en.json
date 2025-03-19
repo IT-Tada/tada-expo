@@ -110,6 +110,7 @@
     }
   },
   "tabs": {
+    "index": "Home",
     "home": "Home",
     "stories": "Stories",
     "create": "Create",

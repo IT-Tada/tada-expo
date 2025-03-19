@@ -23,7 +23,7 @@
     "age": {
       "title": "Tranche d'âge",
       "ranges": {
-        "under-3": "> 3 ans",
+        "under-3": "< 3 ans",
         "3-5": "3-5 ans",
         "6-9": "6-9 ans",
         "10-15": "10-15 ans",
@@ -110,6 +110,7 @@
     }
   },
   "tabs": {
+    "index": "Accueil",
     "home": "Accueil",
     "stories": "Histoires",
     "create": "Créer",

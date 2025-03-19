@@ -57,6 +57,7 @@
     "@babel/core": "^7.25.2",
     "@types/react": "~18.3.12",
     "@types/web": "^0.0.211",
+    "supabase": "^2.19.7",
     "typescript": "^5.3.3"
   }
 }

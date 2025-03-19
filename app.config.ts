@@ -20,17 +20,21 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     supportsTablet: true
   },
   android: {
-    package: "com.tada.tadastory",
-    adaptiveIcon: {
-      foregroundImage: './assets/images/adaptive-icon.png',
-      backgroundColor: '#ffffff'
-    }
+    package: "com.tada.tadastory"
   },
   web: {
     favicon: './assets/images/favicon.png'
   },
   plugins: [
     'expo-router',
+    [
+      "expo-splash-screen",
+      {
+        "image": "./assets/images/splash.png",
+        resizeMode: 'contain',
+        backgroundColor: '#ffffff'
+      }
+    ],
     [
       "expo-speech-recognition",
       {

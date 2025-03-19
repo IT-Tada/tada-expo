@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase/client';
 import { Session } from '@supabase/supabase-js';
 
 export type UserPlan = 'free' | 'premium';

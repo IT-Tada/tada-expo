@@ -110,6 +110,7 @@
     }
   },
   "tabs": {
+    "index": "Start",
     "home": "Start",
     "stories": "Geschichten",
     "create": "Erstellen",
