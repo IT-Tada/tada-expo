@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   },
   selectedText: {
     color: '#333',
-    fontSize: 20,
+    fontSize: 18,
   },
   starBadge: {
     position: 'absolute',
