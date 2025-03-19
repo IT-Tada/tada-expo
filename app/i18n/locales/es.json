@@ -23,11 +23,11 @@
     "age": {
       "title": "Rango de edad",
       "ranges": {
-        "under-3": "Menos de 3 años",
+        "under-3": "> 3 años",
         "3-5": "3-5 años",
         "6-9": "6-9 años",
         "10-15": "10-15 años",
-        "16-plus": "16+ años"
+        "16-plus": "> 16 años"
       }
     },
     "errors": {
