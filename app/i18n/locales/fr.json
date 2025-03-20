@@ -89,24 +89,61 @@
     }
   },
   "account": {
-    "title": "Compte",
-    "guestMessage": "Connecte-toi pour accéder à plus d'histoires",
-    "welcomeBack": "Bon retour",
-    "premiumFeatures": "Fonctionnalités Premium",
-    "premiumDescription": "Débloquer toutes les histoires et le contenu exclusif",
-    "currentPlan": "Forfait actuel",
-    "free": "Gratuit",
-    "premium": "Premium",
-    "switchToLogin": "Tu as déjà un compte ? Connecte-toi",
-    "switchToSignup": "Tu n'as pas de compte ? Inscris-toi",
-    "errors": {
-      "invalidCredentials": "Email ou mot de passe invalide",
-      "emailNotConfirmed": "Vérifie ton email pour confirmer ton compte"
+    "credits": {
+      "available": "Crédits disponibles",
+      "perMonth": "crédits/mois",
+      "unit": "crédits",
+      "status": {
+        "healthy": "Bon",
+        "low": "Faible",
+        "critical": "Critique"
+      },
+      "lowWarning": "Vos crédits sont presque épuisés. Ajoutez-en pour continuer à créer des histoires !"
     },
-    "stories": {
-      "free": "Histoires gratuites",
-      "premium": "Histoires Premium",
-      "locked": "Contenu verrouillé"
+    "getMoreCredits": "Obtenir plus de crédits",
+    "oneTimePurchase": "Achat unique",
+    "mostPopular": "Le plus populaire",
+    "bestValue": "Meilleur rapport qualité-prix",
+    "save": "Économisez",
+    "savePercent": "Économisez {{percent}}%",
+    "buyNow": "Acheter maintenant",
+    "startSubscription": "Commencer l'abonnement",
+    "securePayment": "Paiement sécurisé traité par Stripe",
+    "billingHistory": "Historique de facturation",
+    "noTransactions": "Aucune transaction pour le moment",
+    "viewHistory": "Voir l'historique d'achats",
+    "welcome": "Bienvenue",
+    "plan": "Forfait",
+    "processing": "Traitement de votre achat...",
+    "faq": {
+      "title": "Questions fréquentes",
+      "credits": {
+        "question": "À quoi servent les crédits ?",
+        "answer": "Les crédits vous permettent de générer de nouvelles histoires. Chaque histoire coûte 1 crédit. Les abonnés premium reçoivent également des crédits mensuels automatiquement."
+      },
+      "subscription": {
+        "question": "Comment fonctionnent les abonnements ?",
+        "answer": "Les abonnements fournissent des crédits chaque mois automatiquement et vous donnent accès aux fonctionnalités premium. Les abonnés mensuels reçoivent 20 crédits/mois, tandis que les abonnés annuels reçoivent 30 crédits/mois."
+      },
+      "cancel": {
+        "question": "Comment annuler mon abonnement ?",
+        "answer": "Vous pouvez annuler votre abonnement à tout moment depuis les paramètres de votre compte. Vous continuerez à avoir accès jusqu'à la fin de votre période de facturation."
+      },
+      "refund": {
+        "question": "Puis-je obtenir un remboursement ?",
+        "answer": "Nous offrons des remboursements dans les 7 jours suivant l'achat si vous n'avez utilisé aucun crédit. Contactez notre équipe d'assistance pour obtenir de l'aide."
+      }
+    },
+    "subscription": {
+      "title": "Abonnement",
+      "monthly": {
+        "name": "Mensuel",
+        "period": "par mois"
+      },
+      "annual": {
+        "name": "Annuel",
+        "period": "par mois, facturé annuellement"
+      }
     }
   },
   "tabs": {

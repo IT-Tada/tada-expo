@@ -2,6 +2,7 @@
   "common": {
     "save": "Save",
     "cancel": "Cancel",
+    "close": "Close",
     "error": "Error",
     "success": "Success",
     "loading": "Loading...",
@@ -12,7 +13,9 @@
     "password": "Password",
     "upgrade": "Upgrade to Premium",
     "confirm": "Confirm",
-    "retry": "Try Again"
+    "retry": "Try Again",
+    "preferences": "Preferences",
+    "processing": "Processing..."
   },
   "preferences": {
     "title": "Preferences",
@@ -89,24 +92,84 @@
     }
   },
   "account": {
-    "title": "Account",
-    "guestMessage": "Sign in to access more stories",
-    "welcomeBack": "Welcome back",
-    "premiumFeatures": "Premium Features",
-    "premiumDescription": "Unlock all stories and exclusive content",
-    "currentPlan": "Current Plan",
+    "lastRenewal": "Last renewal",
+    "nextRenewal": "Next renewal",
+    "renewalTomorrow": "Renews tomorrow",
+    "daysUntilRenewal": "Renews in {{days}} days",
+    "cancelSubscription": {
+      "title": "Cancel Subscription",
+      "message": "Are you sure you want to cancel your subscription? You will still have access until the end of your billing period.",
+      "button": "Cancel Subscription",
+      "confirm": "Yes, Cancel",
+      "success": {
+        "title": "Subscription Cancelled",
+        "message": "Your subscription has been cancelled. You will still have access until the end of your billing period."
+      }
+    },
+    "errors": {
+      "emailRequired": "Email is required",
+      "invalidEmail": "Please enter a valid email address",
+      "passwordRequired": "Password is required",
+      "passwordTooShort": "Password must be at least 6 characters"
+    },
     "free": "Free",
     "premium": "Premium",
-    "switchToLogin": "Already have an account? Login",
-    "switchToSignup": "Don't have an account? Sign up",
-    "errors": {
-      "invalidCredentials": "Invalid email or password",
-      "emailNotConfirmed": "Please check your email to confirm your account"
+    "credits": {
+      "available": "Available Credits",
+      "perMonth": "credits/month",
+      "unit": "credits",
+      "status": {
+        "healthy": "Good",
+        "low": "Low",
+        "critical": "Critical"
+      },
+      "lowWarning": "You're running low on credits. Add more to keep creating stories!"
     },
-    "stories": {
-      "free": "Free Stories",
-      "premium": "Premium Stories",
-      "locked": "Locked Content"
+    "getMoreCredits": "Get More Credits",
+    "oneTimePurchase": "One-time Purchase",
+    "mostPopular": "Most Popular",
+    "bestValue": "Best Value",
+    "save": "Save",
+    "savePercent": "Save {{percent}}%",
+    "buyNow": "Buy Now",
+    "startSubscription": "Start Subscription",
+    "securePayment": "Secure payment processed by Stripe",
+    "billingHistory": "Billing History",
+    "noTransactions": "No transactions yet",
+    "viewHistory": "View purchase history",
+    "welcome": "Welcome",
+    "processing": "Processing your purchase...",
+    "plan": "Plan",
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "credits": {
+        "question": "What are credits used for?",
+        "answer": "Credits let you generate new stories. Each story costs 1 credit. Premium subscribers also get monthly credits automatically."
+      },
+      "subscription": {
+        "question": "How do subscriptions work?",
+        "answer": "Subscriptions provide credits each month automatically and give you access to premium features. Monthly subscribers get 20 credits/month, while annual subscribers get 30 credits/month."
+      },
+      "cancel": {
+        "question": "How do I cancel my subscription?",
+        "answer": "You can cancel your subscription anytime from your account settings. You'll continue to have access until the end of your billing period."
+      },
+      "refund": {
+        "question": "Can I get a refund?",
+        "answer": "We offer refunds within 7 days of purchase if you haven't used any credits. Contact our support team for assistance."
+      }
+    },
+    "subscription": {
+      "title": "Subscription",
+      "status": "Subscription Status",
+      "monthly": {
+        "name": "Monthly",
+        "period": "per month"
+      },
+      "annual": {
+        "name": "Annual",
+        "period": "per month, billed annually"
+      }
     }
   },
   "tabs": {

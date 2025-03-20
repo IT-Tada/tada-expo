@@ -89,24 +89,61 @@
     }
   },
   "account": {
-    "title": "Cuenta",
-    "guestMessage": "Inicia sesión para acceder a más historias",
-    "welcomeBack": "Bienvenido de nuevo",
-    "premiumFeatures": "Características Premium",
-    "premiumDescription": "Desbloquea todas las historias y contenido exclusivo",
-    "currentPlan": "Plan Actual",
-    "free": "Gratis",
-    "premium": "Premium",
-    "switchToLogin": "¿Ya tienes una cuenta? Inicia sesión",
-    "switchToSignup": "¿No tienes una cuenta? Regístrate",
-    "errors": {
-      "invalidCredentials": "Correo o contraseña inválidos",
-      "emailNotConfirmed": "Por favor revisa tu correo para confirmar tu cuenta"
+    "credits": {
+      "available": "Créditos disponibles",
+      "perMonth": "créditos/mes",
+      "unit": "créditos",
+      "status": {
+        "healthy": "Bien",
+        "low": "Bajo",
+        "critical": "Crítico"
+      },
+      "lowWarning": "¡Estás quedándote sin créditos! Añade más para seguir creando historias."
     },
-    "stories": {
-      "free": "Historias Gratuitas",
-      "premium": "Historias Premium",
-      "locked": "Contenido Bloqueado"
+    "getMoreCredits": "Obtener más créditos",
+    "oneTimePurchase": "Compra única",
+    "mostPopular": "Más popular",
+    "bestValue": "Mejor valor",
+    "save": "Ahorra",
+    "savePercent": "Ahorra {{percent}}%",
+    "buyNow": "Comprar ahora",
+    "startSubscription": "Iniciar suscripción",
+    "securePayment": "Pago seguro procesado por Stripe",
+    "billingHistory": "Historial de facturación",
+    "noTransactions": "No hay transacciones todavía",
+    "viewHistory": "Ver historial de compras",
+    "welcome": "Bienvenido",
+    "plan": "Plan",
+    "processing": "Procesando tu compra...",
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "credits": {
+        "question": "¿Para qué sirven los créditos?",
+        "answer": "Los créditos te permiten generar nuevas historias. Cada historia cuesta 1 crédito. Los suscriptores premium también reciben créditos mensuales automáticamente."
+      },
+      "subscription": {
+        "question": "¿Cómo funcionan las suscripciones?",
+        "answer": "Las suscripciones proporcionan créditos cada mes automáticamente y te dan acceso a funciones premium. Los suscriptores mensuales obtienen 20 créditos/mes, mientras que los suscriptores anuales reciben 30 créditos/mes."
+      },
+      "cancel": {
+        "question": "¿Cómo cancelo mi suscripción?",
+        "answer": "Puedes cancelar tu suscripción en cualquier momento desde la configuración de tu cuenta. Seguirás teniendo acceso hasta el final de tu período de facturación."
+      },
+      "refund": {
+        "question": "¿Puedo obtener un reembolso?",
+        "answer": "Ofrecemos reembolsos dentro de los 7 días posteriores a la compra si no has utilizado ningún crédito. Contacta a nuestro equipo de soporte para obtener ayuda."
+      }
+    },
+    "subscription": {
+      "title": "Suscripción",
+      "monthly": {
+        "name": "Mensual",
+        "period": "por mes"
+      },
+      "annual": {
+        "name": "Anual",
+        "period": "por mes, facturado anualmente"
+      }
     }
   },
   "tabs": {

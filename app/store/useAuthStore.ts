@@ -9,8 +9,13 @@ interface Profile {
   id: string;
   email: string;
   plan: UserPlan;
+  credits: number;
   created_at: string;
   updated_at: string;
+  last_purchase_date?: string;
+  next_purchase_date?: string;
+  last_renewal_date?: string;
+  next_renewal_date?: string;
 }
 
 interface AuthState {
@@ -20,7 +25,7 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   signup: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  upgradeToPremium: () => Promise<void>;
+  purchaseCredits: (amount: number, isSubscription: boolean) => Promise<void>;
   initialize: () => Promise<void>;
 }
 
@@ -162,15 +167,20 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       throw error;
     }
   },
-
-  upgradeToPremium: async () => {
-    const { session } = get();
-    if (!session?.user) throw new Error('Not authenticated');
+  purchaseCredits: async (amount: number, isSubscription: boolean) => {
+    const { session, profile } = get();
+    if (!session?.user || !profile) throw new Error('Not authenticated');
 
     try {
+      // This would typically integrate with a payment processor
+      // For now, we'll just update the credits in the profile
       const { data, error } = await supabase
         .from('profiles')
-        .update({ plan: 'premium' })
+        .update({ 
+          credits: profile.credits + amount,
+          // If it's a subscription, we'd also update the subscription status
+          ...(isSubscription && { plan: 'premium' })
+        })
         .eq('id', session.user.id)
         .select()
         .single();
@@ -181,9 +191,11 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         ...state,
         profile: data,
       }));
+      
+      return data;
     } catch (error) {
-      console.error('Upgrade error:', error);
+      console.error('Purchase error:', error);
       throw error;
     }
-  },
+  }
 }));
