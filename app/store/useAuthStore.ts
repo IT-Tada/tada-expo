@@ -12,6 +12,10 @@ interface Profile {
   credits: number;
   created_at: string;
   updated_at: string;
+  last_purchase_date?: string;
+  next_purchase_date?: string;
+  last_renewal_date?: string;
+  next_renewal_date?: string;
 }
 
 interface AuthState {

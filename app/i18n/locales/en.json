@@ -13,7 +13,9 @@
     "password": "Password",
     "upgrade": "Upgrade to Premium",
     "confirm": "Confirm",
-    "retry": "Try Again"
+    "retry": "Try Again",
+    "preferences": "Preferences",
+    "processing": "Processing..."
   },
   "preferences": {
     "title": "Preferences",
@@ -90,6 +92,26 @@
     }
   },
   "account": {
+    "lastRenewal": "Last renewal",
+    "nextRenewal": "Next renewal",
+    "renewalTomorrow": "Renews tomorrow",
+    "daysUntilRenewal": "Renews in {{days}} days",
+    "cancelSubscription": {
+      "title": "Cancel Subscription",
+      "message": "Are you sure you want to cancel your subscription? You will still have access until the end of your billing period.",
+      "button": "Cancel Subscription",
+      "confirm": "Yes, Cancel",
+      "success": {
+        "title": "Subscription Cancelled",
+        "message": "Your subscription has been cancelled. You will still have access until the end of your billing period."
+      }
+    },
+    "errors": {
+      "emailRequired": "Email is required",
+      "invalidEmail": "Please enter a valid email address",
+      "passwordRequired": "Password is required",
+      "passwordTooShort": "Password must be at least 6 characters"
+    },
     "free": "Free",
     "premium": "Premium",
     "credits": {
@@ -139,6 +161,7 @@
     },
     "subscription": {
       "title": "Subscription",
+      "status": "Subscription Status",
       "monthly": {
         "name": "Monthly",
         "period": "per month"

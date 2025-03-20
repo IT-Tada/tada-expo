@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   StyleSheet,
@@ -11,23 +11,25 @@ import {
   Keyboard,
   TextInput,
   TouchableOpacity,
+  NativeSyntheticEvent,
+  TextInputKeyPressEventData,
+  Platform,
+  Alert,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { ChevronRight, Crown, LogOut, Mail, Star, Lock } from 'lucide-react-native';
+import { LogOut, Mail, Lock, Settings } from 'lucide-react-native';
 import { useAuthStore } from '../store/useAuthStore';
 import { BlurView } from 'expo-blur';
-import { FadeIn } from 'react-native-reanimated';
 import { AccountOverview } from '../components/account/AccountOverview';
 import { PaymentOptions } from '../components/account/PaymentOptions';
 import { PaymentFAQ } from '../components/account/PaymentFAQ';
 import { useTheme } from '../context/ThemeContext';
-import { LinearGradient } from 'react-native-svg';
+import { PreferencesModal } from '../components/PreferencesModal';
 
 export default function AccountScreen() {
   const { t } = useTranslation();
   const theme = useTheme();
-  const { status, profile, login, signup, logout, purchaseCredits } =
-    useAuthStore();
+  const { status, profile, login, signup, logout, purchaseCredits } = useAuthStore();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -35,19 +37,37 @@ export default function AccountScreen() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [showHistory, setShowHistory] = useState<boolean>(false);
+  const [showPreferences, setShowPreferences] = useState<boolean>(false);
+  
+  // Form validation state
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  
+  // Create refs for form fields
+  const emailInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInput>(null);
 
   // Animation values
   const fadeAnim = useState(new Animated.Value(0))[0];
   const buttonScale = useState(new Animated.Value(1))[0];
 
   // Animate component on mount
-  React.useEffect(() => {
+  useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 500,
       useNativeDriver: true,
     }).start();
-  }, []);
+    
+    // Auto-focus email input if in guest mode
+    if (status === 'guest') {
+      setTimeout(() => {
+        if (emailInputRef.current) {
+          emailInputRef.current.focus();
+        }
+      }, 300);
+    }
+  }, [status]);
 
   const handleButtonPress = () => {
     Animated.sequence([
@@ -64,26 +84,39 @@ export default function AccountScreen() {
     ]).start();
   };
 
-  const validateEmail = (email: string): boolean => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // Handle form validation
+  const validateForm = (): boolean => {
+    let isValid = true;
+    
+    // Validate email
+    if (!email.trim()) {
+      setEmailError(t('account.errors.emailRequired'));
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setEmailError(t('account.errors.invalidEmail'));
+      isValid = false;
+    } else {
+      setEmailError(null);
+    }
+    
+    // Validate password
+    if (!password.trim()) {
+      setPasswordError(t('account.errors.passwordRequired'));
+      isValid = false;
+    } else if (password.length < 6) {
+      setPasswordError(t('account.errors.passwordTooShort'));
+      isValid = false;
+    } else {
+      setPasswordError(null);
+    }
+    
+    return isValid;
   };
 
   const handleAuth = async () => {
     Keyboard.dismiss();
 
-    // Basic validation
-    if (!email || !password) {
-      setError(t('account.errors.fieldsRequired'));
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setError(t('account.errors.invalidEmail'));
-      return;
-    }
-
-    if (password.length < 6) {
-      setError(t('account.errors.passwordTooShort'));
+    if (!validateForm()) {
       return;
     }
 
@@ -110,6 +143,34 @@ export default function AccountScreen() {
       setIsLoading(false);
     }
   };
+  
+  // Handle Enter key press for form submission
+  const handleKeyPress = (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+    if (e.nativeEvent.key === 'Enter') {
+      handleAuth();
+    }
+  };
+  
+  // Handle subscription cancellation
+  const handleCancelSubscription = async () => {
+    try {
+      setIsLoading(true);
+      
+      // This would call an actual API to cancel the subscription
+      // For now, we'll just simulate it
+      Alert.alert(
+        t('account.cancelSubscription.success.title'),
+        t('account.cancelSubscription.success.message'),
+        [{ text: t('common.close') }]
+      );
+      
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || t('common.error'));
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const renderGuestView = () => (
     <Animated.View style={[styles.section, { opacity: fadeAnim }]}>
@@ -119,34 +180,50 @@ export default function AccountScreen() {
         <View style={styles.inputContainer}>
           <Mail size={20} color="#999" style={styles.inputIcon} />
           <TextInput
+            ref={emailInputRef}
             style={styles.input}
             placeholder={t('account.emailPlaceholder')}
             value={email}
-            onChangeText={setEmail}
+            onChangeText={(text) => {
+              setEmail(text);
+              if (emailError) setEmailError(null);
+            }}
             autoCapitalize="none"
             keyboardType="email-address"
             autoComplete="email"
+            returnKeyType="next"
+            onSubmitEditing={() => passwordInputRef.current?.focus()}
+            blurOnSubmit={false}
             accessibilityLabel={t('account.emailPlaceholder')}
           />
         </View>
+        
+        {emailError && (
+          <Text style={styles.fieldErrorText}>{emailError}</Text>
+        )}
 
         <View style={styles.inputContainer}>
           <Lock size={20} color="#999" style={styles.inputIcon} />
           <TextInput
+            ref={passwordInputRef}
             style={styles.input}
             placeholder={t('account.passwordPlaceholder')}
             value={password}
-            onChangeText={setPassword}
+            onChangeText={(text) => {
+              setPassword(text);
+              if (passwordError) setPasswordError(null);
+            }}
             secureTextEntry
             autoComplete="password"
+            returnKeyType="done"
+            onKeyPress={handleKeyPress}
+            onSubmitEditing={handleAuth}
             accessibilityLabel={t('account.passwordPlaceholder')}
           />
         </View>
-
-        {error && (
-          <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{error}</Text>
-          </View>
+        
+        {passwordError && (
+          <Text style={styles.fieldErrorText}>{passwordError}</Text>
         )}
 
         <Animated.View style={{ transform: [{ scale: buttonScale }] }}>
@@ -175,6 +252,8 @@ export default function AccountScreen() {
           onPress={() => {
             setIsSignup(!isSignup);
             setError(null);
+            setEmailError(null);
+            setPasswordError(null);
           }}
           accessibilityRole="button"
         >
@@ -188,55 +267,69 @@ export default function AccountScreen() {
     </Animated.View>
   );
 
-    // Handle credit purchase
-    const handlePurchase = async (packageId: string, isSubscription: boolean) => {
-      try {
-        setIsLoading(true);
-        
-        // Determine credit amount from package ID
+  // Handle credit purchase
+  const handlePurchase = async (packageId: string, isSubscription: boolean) => {
+    try {
+      setIsLoading(true);
+      
+      // Determine credit amount from package ID
         // This would be more robust in a real implementation
-        let creditAmount = 0;
-        
-        if (isSubscription) {
-          creditAmount = packageId === 'monthly' ? 20 : 30;
-          await purchaseCredits(creditAmount, true);
-        } else {
-          // One-time purchase
-          switch (packageId) {
-            case 'small':
-              creditAmount = 10;
-              break;
-            case 'medium':
-              creditAmount = 30;
-              break;
-            case 'large':
-              creditAmount = 60;
-              break;
-            case 'xlarge':
-              creditAmount = 100;
-              break;
-          }
-          await purchaseCredits(creditAmount, false);
+      let creditAmount = 0;
+      
+      if (isSubscription) {
+        creditAmount = packageId === 'monthly' ? 20 : 30;
+        await purchaseCredits(creditAmount, true);
+      } else {
+        // One-time purchase
+        switch (packageId) {
+          case 'small':
+            creditAmount = 10;
+            break;
+          case 'medium':
+            creditAmount = 30;
+            break;
+          case 'large':
+            creditAmount = 60;
+            break;
+          case 'xlarge':
+            creditAmount = 100;
+            break;
         }
-        
-        // Success state handling
-        setError(null);
-      } catch (err: any) {
-        setError(err.message || t('common.error'));
-      } finally {
-        setIsLoading(false);
+        await purchaseCredits(creditAmount, false);
       }
-    };
+      
+      // Success state handling
+      setError(null);
+    } catch (err: any) {
+      setError(err.message || t('common.error'));
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const renderUserView = () => (
     <Animated.View style={{ flex: 1 }}>
-      {/* Account Overview */}
+      {/* Account Overview with subscription details */}
       <AccountOverview 
         credits={profile?.credits || 0}
         plan={profile?.plan || 'free'}
         email={profile?.email || ''}
         onViewHistory={() => setShowHistory(true)}
+        lastRenewal="2025-03-01T00:00:00.000Z" // Example date for demo
+        nextRenewal="2025-04-01T00:00:00.000Z" // Example date for demo
+        onCancelSubscription={profile?.plan === 'premium' ? handleCancelSubscription : undefined}
       />
+      
+      {/* Preferences Button */}
+      <Pressable
+        style={styles.preferencesButton}
+        onPress={() => setShowPreferences(true)}
+      >
+        <Settings size={18} color="#666" />
+        <Text style={styles.preferencesButtonText}>
+          {t('common.preferences')}
+        </Text>
+      </Pressable>
       
       {/* Payment Options */}
       <PaymentOptions onPurchase={handlePurchase} />
@@ -283,6 +376,12 @@ export default function AccountScreen() {
           </View>
         </View>
       </Modal>
+      
+      {/* Preferences Modal */}
+      <PreferencesModal
+        visible={showPreferences}
+        onClose={() => setShowPreferences(false)}
+      />
       
       {/* Loading Overlay */}
       {isLoading && (
@@ -358,17 +457,29 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Quicksand-Regular',
     color: '#333',
+    minHeight: 52,
+  },
+  fieldErrorText: {
+    color: '#FF3B30',
+    fontSize: 12,
+    fontFamily: 'Quicksand-Medium',
+    marginTop: -10,
+    marginBottom: 10,
+    marginLeft: 12,
   },
   button: {
     backgroundColor: '#FF6B6B',
     borderRadius: 12,
     padding: 18,
     alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 56,
     shadowColor: '#FF6B6B',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 3,
+    marginVertical: 10,
   },
   buttonText: {
     color: '#FFF',
@@ -396,6 +507,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Quicksand-Medium',
     textAlign: 'center',
+  },
+  preferencesButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F5F5F5',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    marginBottom: 20,
+  },
+  preferencesButtonText: {
+    marginLeft: 8,
+    fontFamily: 'Quicksand-Bold',
+    fontSize: 14,
+    color: '#666',
   },
   logoutButton: {
     backgroundColor: '#F5F5F5',
